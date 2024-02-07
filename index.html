@@ -39,13 +39,17 @@
     <!-- Page 1 -->
     <div class="page active" id="page1">
       <h2>Page 1</h2>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <span id="nameError" class="error-message"></span>
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <span id="nameError" class="error-message"></span>
+      </p>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <span id="emailError" class="error-message"></span>
+      <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error-message"></span>
+      </p>
 
       <button type="button" onclick="nextPage('page1', 'page2')">Next</button>
     </div>
