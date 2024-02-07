@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Vertical Sections</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            height: 100vh;
+        }
+
+        section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-right: 1px solid #ccc;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-top: 5px;
+            margin-right: 20px;
+        }
+
+        h1,
+        h4 {
+            color: #333;
+        }
+
+        /* Add the following CSS to make options appear in line */
+        .options label {
+            display: flex;
+            align-items: center;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .ques_list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .num_input {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <div class="options" id="option1" onsubmit="return val_q1()">
+            <p class="question">Online moisture sensor already installed on Dryer or Cooler</p>
+            <label>
+                <input type="radio" name="option1" value="true">
+                Yes
+            </label>
+            <label>
+                <input type="radio" name="option1" value="false">
+                No
+            </label>
+        </div>
+
+        <div class="options" id="option2" onsubmit="return val_q2()">
+            <p>Humidity sensor already installed on hot air exhaust</p>
+            <label>
+                <input type="radio" name="option2" value="true">
+                Yes
+            </label>
+            <label>
+                <input type="radio" name="option2" value="false">
+                No
+            </label>
+        </div>
+
+        <div class="ques_list">
+            <div class="num_input" id="question3" onsubmit="return val_q3()">
+                <label for="moisture_average">Present Moisture Average:</label>
+                <input type="number" id="moisture_average" name="moisture_average" required>
+            </div>
+    
+            <div class="num_input" id="question4" onsubmit="return val_q4()">
+                <label for="annual_production">Annual Production from line:</label>
+                <input type="number" id="annual_production" name="annual_production" required>
+            </div>
+    
+            <div class="num_input" id="question5" onsubmit="return val_q5()">
+                <label for="selling_price">Selling price of feed per ton:</label>
+                <input type="number" id="selling_price" name="selling_price" required>
+            </div>
+        </div>
+
+
+
+
+
+    </section>
+
+    <section>
+        <p>
+            <span id="common_res"></span>
+        </p>
+        <p>
+            <span id="q1_res"></span>
+        </p>
+        <p>
+            <span id="q2_res"></span>
+        </p>
+    </section>
+
+    <script>
+        var q1_ans = document.getElementById('option1');
+        q1_ans.addEventListener('change', val_q1);
+
+        function val_q1() {
+            var selectedOption = document.querySelector('input[name="option1"]:checked');
+            var resultElement = document.getElementById('q1_res');
+            // var resultElement = document.getElementById('common_res');
+
+            if (selectedOption) {
+                resultElement.textContent = (selectedOption.value);// == "true") ? "Great1" : "OKAY1";
+            } else {
+                resultElement.textContent = ""; // No option selected
+            }
+        }
+
+        var q2_ans = document.getElementById('option2');
+        q2_ans.addEventListener('change', val_q2);
+
+        function val_q2() {
+            var selectedOption = document.querySelector('input[name="option2"]:checked');
+            var resultElement = document.getElementById('q2_res');
+            // var resultElement = document.getElementById('common_res');
+
+            if (selectedOption) {
+                resultElement.textContent = (selectedOption.value);// == "true") ? "Great2" : "OKAY2";
+            } else {
+                resultElement.textContent = ""; // No option selected
+            }
+        }
+
+        var q3_ans = document.getElementById('moisture_average');
+        q3_ans.addEventListener('change', val_q3);
+
+        function val_q3() {
+            var moisture_average = document.getElementById('moisture_average');
+            // var resultElement = document.getElementById('q2_res');
+            var resultElement = document.getElementById('common_res');
+            if (moisture_average.value > 6 && moisture_average.value < 10) {
+                resultElement.textContent = moisture_average.value;
+            }
+            else {
+                var text = "Moisture level is not in the acceptable range. Please check and try again." + moisture_average.value
+                alert(text);
+                document.getElementById('moisture_average').value = "";
+            }
+        }
+
+        var q4_ans = document.getElementById('annual_production');
+        q4_ans.addEventListener('change', val_q4);
+
+        function val_q4() {
+            var annual_production = document.getElementById('annual_production');
+            // var resultElement = document.getElementById('q2_res');
+            var resultElement = document.getElementById('common_res');
+            if (annual_production.value > 20000 && annual_production.value < 60000) {
+                resultElement.textContent = annual_production.value;
+            }
+            else {
+                var text2 = "annual_production is not in the acceptable range. Please check and try again." + annual_production.value
+                alert(text2);
+                document.getElementById('annual_production').value = "";
+            }
+        }
+
+        var q5_ans = document.getElementById('selling_price');
+        q5_ans.addEventListener('change', val_q5);
+
+        function val_q5() {
+            var selling_price = document.getElementById('selling_price');
+            // var resultElement = document.getElementById('q2_res');
+            var resultElement = document.getElementById('common_res');
+            if (selling_price.value > 20000 && selling_price.value < 60000) {
+                resultElement.textContent = selling_price.value;
+            }
+            else {
+                var text2 = "selling_price is not in the acceptable range. Please check and try again." + selling_price.value
+                alert(text2);
+                document.getElementById('selling_price').value = "";
+            }
+        }
+    </script>
+</body>
+
+</html>
