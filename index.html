@@ -63,6 +63,14 @@
       flex-direction: row;
       align-items: center;
     }
+
+    .download_btn {
+      display: none;
+    }
+
+    .download_btn.active {
+      display: block;
+    }
   </style>
 </head>
 
@@ -108,6 +116,13 @@
         <label for="selling_price">Selling price of feed per ton:</label>
         <input type="number" id="selling_price" name="selling_price" required>
       </div>
+
+    </div>
+    <div>
+      <p><span id="status_level"> </span></p>
+    </div>
+    <div class="download_btn" id="download_btn" onsubmit="return download_btn()">
+      <button type="submit">Click here to download Excel sheet</button>
     </div>
 
 
@@ -131,6 +146,7 @@
   <script>
     var q1_ans = document.getElementById('option1');
     q1_ans.addEventListener('change', val_q1);
+    var isq1_filled = 0;
 
     function val_q1() {
       var selectedOption = document.querySelector('input[name="option1"]:checked');
@@ -142,10 +158,15 @@
       } else {
         resultElement.textContent = ""; // No option selected
       }
+      if (!isq1_filled) {
+        isq1_filled = 1;
+        update_status();
+      }
     }
 
     var q2_ans = document.getElementById('option2');
     q2_ans.addEventListener('change', val_q2);
+    var isq2_filled = 0;
 
     function val_q2() {
       var selectedOption = document.querySelector('input[name="option2"]:checked');
@@ -157,34 +178,47 @@
       } else {
         resultElement.textContent = ""; // No option selected
       }
+      if (!isq2_filled) {
+        isq2_filled = 1;
+        update_status();
+      }
     }
 
     var q3_ans = document.getElementById('moisture_average');
     q3_ans.addEventListener('change', val_q3);
-
+    var isq3_filled = 0;
     function val_q3() {
       var moisture_average = document.getElementById('moisture_average');
       // var resultElement = document.getElementById('q2_res');
       var resultElement = document.getElementById('common_res');
       if (moisture_average.value > 6 && moisture_average.value < 10) {
         resultElement.textContent = moisture_average.value;
+        if (!isq3_filled) {
+          isq3_filled = 1;
+          update_status();
+        }
       }
       else {
         var text = "Moisture level is not in the acceptable range. Please check and try again." + moisture_average.value
         alert(text);
         document.getElementById('moisture_average').value = "";
       }
+
     }
 
     var q4_ans = document.getElementById('annual_production');
     q4_ans.addEventListener('change', val_q4);
-
+    var isq4_filled = 0;
     function val_q4() {
       var annual_production = document.getElementById('annual_production');
       // var resultElement = document.getElementById('q2_res');
       var resultElement = document.getElementById('common_res');
       if (annual_production.value > 20000 && annual_production.value < 60000) {
         resultElement.textContent = annual_production.value;
+        if (!isq4_filled) {
+          isq4_filled = 1;
+          update_status();
+        }
       }
       else {
         var text2 = "annual_production is not in the acceptable range. Please check and try again." + annual_production.value
@@ -195,19 +229,56 @@
 
     var q5_ans = document.getElementById('selling_price');
     q5_ans.addEventListener('change', val_q5);
-
+    var isq5_filled = 0;
     function val_q5() {
       var selling_price = document.getElementById('selling_price');
       // var resultElement = document.getElementById('q2_res');
       var resultElement = document.getElementById('common_res');
       if (selling_price.value > 40000 && selling_price.value < 92000) {
         resultElement.textContent = selling_price.value;
+        if (!isq5_filled) {
+          isq5_filled = 1;
+          update_status();
+        }
       }
       else {
         var text2 = "selling_price is not in the acceptable range. Please check and try again." + selling_price.value
         alert(text2);
         document.getElementById('selling_price').value = "";
       }
+    }
+    var status_level_count = 0;
+    var status_level = document.getElementById('status_level');
+    function update_status() {
+      status_level_count++;
+      // status_level.textContent = status_level_count;
+      if (status_level_count == 5) {
+        document.getElementById('download_btn').classList.add('active');
+      }
+    }
+
+    function download_btn()
+    {
+      // Add validation for Page 3 fields if needed
+      // generateAndDownloadFile();
+      DownloadExcelFile()
+      return false; // Prevent form submission
+    }
+
+    function DownloadExcelFile() {
+      // Create a link element pointing to the existing Excel file in the root directory
+      var link = document.createElement('a');
+      link.href = 'data.xlsx';  // Replace 'your_existing_file.xlsx' with the actual filename
+
+      // Set the download attribute to force a download
+      link.download = 'optify_calculator.xlsx';  // Replace 'downloaded_file.xlsx' with the desired name for the downloaded file
+
+      // Append the link to the document and trigger the click event
+      document.body.appendChild(link);
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
     }
   </script>
 </body>
