@@ -116,13 +116,16 @@
         <label for="selling_price">Selling price of feed per ton:</label>
         <input type="number" id="selling_price" name="selling_price" required>
       </div>
-
     </div>
+
     <div>
       <p><span id="status_level"> </span></p>
     </div>
-    <div class="download_btn" id="download_btn" onsubmit="return download_btn()">
-      <button type="submit">Click here to download Excel sheet</button>
+
+    <div class="download_btn" id="download_btn" >
+      <form onsubmit="return download_btn_fun()">
+        <button type="submit">Click here to download Excel sheet</button>
+      </form>
     </div>
 
 
@@ -251,22 +254,24 @@
     var status_level = document.getElementById('status_level');
     function update_status() {
       status_level_count++;
-      // status_level.textContent = status_level_count;
+      status_level.textContent = status_level_count;
       if (status_level_count == 5) {
         document.getElementById('download_btn').classList.add('active');
+        console.log("btn active");
       }
     }
 
-    function download_btn()
-    {
-      // Add validation for Page 3 fields if needed
-      // generateAndDownloadFile();
-      DownloadExcelFile()
+
+    function download_btn_fun() {
+      console.log("btn click");
+      DownloadExcelFile();
+      console.log("btn return");
       return false; // Prevent form submission
     }
 
     function DownloadExcelFile() {
       // Create a link element pointing to the existing Excel file in the root directory
+      console.log("clink");
       var link = document.createElement('a');
       link.href = 'data.xlsx';  // Replace 'your_existing_file.xlsx' with the actual filename
 
@@ -279,6 +284,7 @@
 
       // Remove the link from the document
       document.body.removeChild(link);
+      document.getElementById('download_btn').classList.remove('active');
     }
   </script>
 </body>
