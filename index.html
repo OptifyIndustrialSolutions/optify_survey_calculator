@@ -153,14 +153,14 @@
 
     function val_q1() {
       var selectedOption = document.querySelector('input[name="option1"]:checked');
-      var resultElement = document.getElementById('q1_res');
-      // var resultElement = document.getElementById('common_res');
+      // var resultElement = document.getElementById('q1_res');
+      // // var resultElement = document.getElementById('common_res');
 
-      if (selectedOption) {
-        resultElement.textContent = (selectedOption.value);// == "true") ? "Great1" : "OKAY1";
-      } else {
-        resultElement.textContent = ""; // No option selected
-      }
+      // if (selectedOption) {
+      //   resultElement.textContent = (selectedOption.value);// == "true") ? "Great1" : "OKAY1";
+      // } else {
+      //   resultElement.textContent = ""; // No option selected
+      // }
       if (!isq1_filled) {
         isq1_filled = 1;
         update_status();
@@ -173,14 +173,14 @@
 
     function val_q2() {
       var selectedOption = document.querySelector('input[name="option2"]:checked');
-      var resultElement = document.getElementById('q2_res');
-      // var resultElement = document.getElementById('common_res');
+      // var resultElement = document.getElementById('q2_res');
+      // // var resultElement = document.getElementById('common_res');
 
-      if (selectedOption) {
-        resultElement.textContent = (selectedOption.value);// == "true") ? "Great2" : "OKAY2";
-      } else {
-        resultElement.textContent = ""; // No option selected
-      }
+      // if (selectedOption) {
+      //   resultElement.textContent = (selectedOption.value);// == "true") ? "Great2" : "OKAY2";
+      // } else {
+      //   resultElement.textContent = ""; // No option selected
+      // }
       if (!isq2_filled) {
         isq2_filled = 1;
         update_status();
@@ -193,9 +193,9 @@
     function val_q3() {
       var moisture_average = document.getElementById('moisture_average');
       // var resultElement = document.getElementById('q2_res');
-      var resultElement = document.getElementById('common_res');
+      // var resultElement = document.getElementById('common_res');
       if (moisture_average.value > 6 && moisture_average.value < 10) {
-        resultElement.textContent = moisture_average.value;
+        // resultElement.textContent = moisture_average.value;
         if (!isq3_filled) {
           isq3_filled = 1;
           update_status();
@@ -215,9 +215,9 @@
     function val_q4() {
       var annual_production = document.getElementById('annual_production');
       // var resultElement = document.getElementById('q2_res');
-      var resultElement = document.getElementById('common_res');
+      // var resultElement = document.getElementById('common_res');
       if (annual_production.value > 20000 && annual_production.value < 60000) {
-        resultElement.textContent = annual_production.value;
+        // resultElement.textContent = annual_production.value;
         if (!isq4_filled) {
           isq4_filled = 1;
           update_status();
@@ -236,9 +236,9 @@
     function val_q5() {
       var selling_price = document.getElementById('selling_price');
       // var resultElement = document.getElementById('q2_res');
-      var resultElement = document.getElementById('common_res');
+      // var resultElement = document.getElementById('common_res');
       if (selling_price.value > 40000 && selling_price.value < 92000) {
-        resultElement.textContent = selling_price.value;
+        // resultElement.textContent = selling_price.value;
         if (!isq5_filled) {
           isq5_filled = 1;
           update_status();
@@ -254,7 +254,8 @@
     var status_level = document.getElementById('status_level');
     function update_status() {
       status_level_count++;
-      status_level.textContent = status_level_count;
+      console.log("status_level_count " + status_level_count)
+      // status_level.textContent = status_level_count;
       if (status_level_count == 5) {
         document.getElementById('download_btn').classList.add('active');
         console.log("btn active");
@@ -271,7 +272,7 @@
 
     function DownloadExcelFile() {
       // Create a link element pointing to the existing Excel file in the root directory
-      console.log("clink");
+      console.log("download");
       var link = document.createElement('a');
       link.href = 'data.xlsx';  // Replace 'your_existing_file.xlsx' with the actual filename
 
