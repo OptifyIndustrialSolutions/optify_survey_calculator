@@ -111,6 +111,7 @@
   <div class="popup" id="popup">
     <span class="close-btn" onclick="closePopup()">&times;</span>
     <!-- <p>This is a simple popup window!</p> -->
+    <p id="popup_message"></p>
   </div>
   <section>
     <div class="options" id="option1" onsubmit="return val_q1()">
@@ -325,7 +326,7 @@
     }
 
     function openPopup(text) {
-      document.getElementById('popup').textContent = text;
+      document.getElementById('popup_message').textContent = text;
       document.getElementById('overlay').style.display = 'block';
       document.getElementById('popup').style.display = 'block';
     }
